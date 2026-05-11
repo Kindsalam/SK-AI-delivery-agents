@@ -11,6 +11,7 @@ Keeps the roadmap honest with what has happened, not what the product manager re
 ## Reads from
 
 - Jira initiatives at the epic-and-above level
+- Jira Plans (advanced roadmap) for cross-team plan state and dependency view
 - ProductBoard or Aha or Jira Product Discovery (whichever the org uses)
 - Engineering capacity estimates from delivery
 - Dependency notes

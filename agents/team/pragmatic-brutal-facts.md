@@ -41,7 +41,7 @@ The agent is useless without a baseline. The first job is to compute one. Take t
 
 Gamed metrics will produce gamed flags. If your team is incentivised to game velocity, the agent will flag the symptom, not the cause.
 
-The 60-90 day baseline backfill is real engineering work. Querying changelog across many issues hits Jira Cloud per-tenant rate limits fast. Most teams will need to cache via a side-car process rather than running the baseline computation live each morning. Jira Data Center customers will need to confirm their MCP server flavour supports the Sprint history endpoints; coverage as of mid-2026 is partial.
+The 60-90 day baseline backfill is real engineering work. Querying changelog across many issues hits Jira Cloud per-tenant rate limits fast. Most teams will need to cache via a side-car process rather than running the baseline computation live each morning. Jira Data Center customers will need to confirm their MCP server flavour supports the Sprint history endpoints. Coverage as of mid-2026 is partial.
 
 
 ---

@@ -1,7 +1,7 @@
 # cross-team-dependency-agent
 
 **Tier:** Scrum of Scrums / multi-team coordination
-**Cadence event:** Scrum of Scrums (a coordination convention, not a Scrum Guide event; equivalent in Nexus is the Nexus Daily Scrum, in SAFe the ART Sync)
+**Cadence event:** Scrum of Scrums (a coordination convention, not a Scrum Guide event. Equivalent in Nexus is the Nexus Daily Scrum, in SAFe the ART Sync)
 **Cadence:** Daily, posted 30 minutes before the SoS standup. Also on-demand for ad-hoc dependency reviews.
 
 ## What it does

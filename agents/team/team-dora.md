@@ -11,8 +11,8 @@ The four-numbers card. Deployment frequency, lead time for changes, change failu
 ## Reads from
 
 - CI/CD pipeline: deployment frequency, build success, production deploy timestamps
-- Incident management tool: incident open time, MTTR, change-failure rate
-- GitHub joined to the CI/CD pipeline: lead time for changes (computed from the first commit on a PR through to the production deploy timestamp; you need both inputs, GitHub alone does not know when something hit production)
+- Incident management tool: MTTR, change-failure rate
+- GitHub joined to the CI/CD pipeline: lead time for changes (computed from the first commit on a PR through to the production deploy timestamp. You need both inputs because GitHub alone does not know when something hit production)
 
 ## Produces
 

@@ -1,6 +1,6 @@
 # design-partner-state-agent
 
-> **Status: also-considered.** Real, buildable, but assumes a CRM and customer-success maturity most readers will not have on day one. I cut it from the article because it presupposes a design-partner programme already running with named partners, scheduled call cadences, and conversion-readiness tracking. Build it once that programme is in place.
+> **Status: also-considered.** Real, buildable, but assumes a CRM and customer-success maturity most readers will not have on day one. I cut it from the article because it presupposes a design-partner program already running with named partners, scheduled call cadences, and conversion-readiness tracking. Build it once that program is in place.
 
 **Tier:** LT cadence
 **Cadence event:** Monthly design-partner cohort review
@@ -28,7 +28,7 @@ Lands in the product Confluence space.
 
 ## Audience
 
-Head of product, design-partner programme owner, GM, sales leadership.
+Head of product, design-partner program owner, GM, sales leadership.
 
 ## Pain it removes
 
@@ -46,7 +46,7 @@ The prompt tells the runtime to read the design-partner CRM records, usage data,
 
 If design-partner data lives across three systems with no shared identifier, the agent will struggle. Pick a canonical partner ID first.
 
-"Drifting" is a tone-loaded label. The flag should be precise about what drift means (no usage in 14 days, no scheduled call in 30 days) so the programme owner can act on the underlying signal, not the label.
+"Drifting" is a tone-loaded label. The flag should be precise about what drift means (no usage in 14 days, no scheduled call in 30 days) so the program owner can act on the underlying signal, not the label.
 
 
 ---

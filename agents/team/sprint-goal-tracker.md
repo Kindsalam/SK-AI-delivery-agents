@@ -39,7 +39,7 @@ The prompt tells the runtime to read the Sprint Goal text, identify the linked i
 
 ## Risks and cautions
 
-If the Sprint Goal is not written down anywhere the agent can read, it cannot do this job. Push the team to write the Sprint Goal in the same place every sprint (Jira sprint metadata is the canonical place; a Confluence page works too).
+If the Sprint Goal is not written down anywhere the agent can read, it cannot do this job. Push the team to write the Sprint Goal in the same place every sprint (Jira sprint metadata is the canonical place. A Confluence page works too).
 
 If the items linked to the Sprint Goal are not flagged as such in Jira, the agent cannot tell which items contribute to the goal. Use a label, a fix-version, or a custom field. Pick one and stick to it.
 

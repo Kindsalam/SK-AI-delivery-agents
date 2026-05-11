@@ -10,7 +10,7 @@ At the end of every sprint, this agent has already stitched together what happen
 
 What the portfolio leader stops doing: chasing every program manager for a status before each fortnightly portfolio review. Hand-assembling a rollup deck nobody is sure is current. Walking into the portfolio prioritisation conversation cold because there has been no time to assemble the cross-program picture.
 
-The final call is the portfolio leader's. The agent rolls up the data; the leader interprets and acts.
+The final call is the portfolio leader's. The agent rolls up the data. The leader interprets and acts.
 
 ## Reads from
 
@@ -57,7 +57,7 @@ The portfolio leader hand-assembling a rollup deck every fortnight by chasing fi
 
 ## Prompt-shape sketch
 
-The prompt tells the runtime to read each program's multi-team-sprint-rollup output, the portfolio-level OKR scorecard subset, the strategic-bets register, and any cross-program dependencies. The prompt tells the runtime to assemble a portfolio-level rollup with the fixed sections above, written in plain English for a leadership audience. The prompt explicitly forbids the agent from reading raw Jira at portfolio scale (each program's rollup is the canonical input) and from updating any canonical artefacts. The agent stitches and writes; the portfolio leader interprets and decides.
+The prompt tells the runtime to read each program's multi-team-sprint-rollup output, the portfolio-level OKR scorecard subset, the strategic-bets register, and any cross-program dependencies. The prompt tells the runtime to assemble a portfolio-level rollup with the fixed sections above, written in plain English for a leadership audience. The prompt explicitly forbids the agent from reading raw Jira at portfolio scale (each program's rollup is the canonical input) and from updating any canonical artefacts. The agent stitches and writes. The portfolio leader interprets and decides.
 
 ## Risks and cautions
 
@@ -69,7 +69,7 @@ The prompt tells the runtime to read each program's multi-team-sprint-rollup out
 
 **Strategic-bets movement can read as recommendation.** When a bet's evidence has not moved for three sprints, the agent's "no movement" line will read like a kill-the-bet flag. The agent does not flag kill or double-down (that is the portfolio-bets-readout-agent's job, monthly). Keep the language descriptive.
 
-**The portfolio leader is the only audience that should rely on this agent.** Programs reading their own line in the portfolio rollup will be tempted to react to wording they did not control. Make sure each program's rollup is the canonical view of that program; the portfolio rollup is for the portfolio audience.
+**The portfolio leader is the only audience that should rely on this agent.** Programs reading their own line in the portfolio rollup will be tempted to react to wording they did not control. Make sure each program's rollup is the canonical view of that program. The portfolio rollup is for the portfolio audience.
 
 ---
 

@@ -20,7 +20,7 @@ Stitches each team's sprint-end signal into a single program-level read so the p
 A program-level rollup in the program channel:
 - One line per team: Sprint Goal verdict and headline
 - One paragraph per Initiative: what moved, what slipped, what is at risk
-- A single paragraph at the top summarising what the data says about the sprint just ended (the rollup is a data summary; the program manager interprets)
+- A single paragraph at the top summarising what the data says about the sprint just ended (the rollup is a data summary. The program manager interprets)
 
 ## Audience
 

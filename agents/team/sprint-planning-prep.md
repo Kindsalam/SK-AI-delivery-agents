@@ -14,7 +14,7 @@ The final call is always the team's. The agent drafts. The PO sharpens. The team
 
 ## Reads from
 
-- Jira: team velocity over a rolling window the team agreed on (six sprints is a common default; the Scrum Guide does not name velocity at all)
+- Jira: team velocity over a rolling window the team agreed on (six sprints is a common default. The Scrum Guide does not name velocity at all)
 - This sprint's planned capacity: leave calendars, on-call roster, scheduled meetings (the planned-capacity reality)
 - The refined and DoR-clean backlog from refinement-prep-agent
 - Last sprint's carry-over items
@@ -78,11 +78,11 @@ The PO drafting goal candidates under time pressure on the morning of planning, 
 
 ## Prompt-shape sketch
 
-The prompt tells the runtime to read the Initiative's current top metric, the refined backlog, the team's velocity-adjusted capacity, and the team's recent Sprint Goal patterns. The prompt tells the runtime to draft two or three Sprint Goal candidates, each tied to specific backlog items, each with a one-line rationale, each capacity-checked. The prompt tells the runtime to write the goals in the team's voice (not in a generic Scrum voice) by referencing the recent Sprint Goal patterns. The prompt explicitly forbids the agent from picking a single goal, committing to Jira sprint metadata, or optimising capacity to match the goal. Every draft is candidates and capacity reality; the team picks.
+The prompt tells the runtime to read the Initiative's current top metric, the refined backlog, the team's velocity-adjusted capacity, and the team's recent Sprint Goal patterns. The prompt tells the runtime to draft two or three Sprint Goal candidates, each tied to specific backlog items, each with a one-line rationale, each capacity-checked. The prompt tells the runtime to write the goals in the team's voice (not in a generic Scrum voice) by referencing the recent Sprint Goal patterns. The prompt explicitly forbids the agent from picking a single goal, committing to Jira sprint metadata, or optimising capacity to match the goal. Every draft is candidates and capacity reality. The team picks.
 
 ## Risks and cautions
 
-**Run shadow mode for the first week.** The agent drafts in plain text and posts to a channel. The PO writes the actual Confluence page. After a week of trust, enable Confluence write access where the agent updates the planning page directly. The agent never gets Jira sprint-metadata write access; that gate is permanent.
+**Run shadow mode for the first week.** The agent drafts in plain text and posts to a channel. The PO writes the actual Confluence page. After a week of trust, enable Confluence write access where the agent updates the planning page directly. The agent never gets Jira sprint-metadata write access. That gate is permanent.
 
 **Velocity-adjusted capacity is a starting frame, not a commitment.** Teams that treat the agent's capacity number as a target will commit to it and the agent will get blamed when they overrun. Treat it as the opening number for a human conversation.
 

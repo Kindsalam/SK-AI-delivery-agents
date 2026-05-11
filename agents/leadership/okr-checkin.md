@@ -6,11 +6,11 @@
 
 ## What it does
 
-Runs the weekly OKR check-in (Christina Wodtke's discipline, adapted to a Monday-commitment / Friday-win split) so the OKR sheet is not opened only the day before the meeting and the confidence ratings are not guessed in the room. The confidence rating per key result is the part that matters. The trend across weeks tells you whether you will hit the quarter; that is the load-bearing output, not the Monday/Friday split.
+Runs the weekly OKR check-in (Christina Wodtke's discipline, adapted to a Monday-commitment / Friday-win split) so the OKR sheet is not opened only the day before the meeting and the confidence ratings are not guessed in the room. The confidence rating per key result is the part that matters. The trend across weeks tells you whether you will hit the quarter. That is the load-bearing output, not the Monday/Friday split.
 
 ## Reads from
 
-- The OKR sheet (a sheet, Confluence, Lattice, Ally.io, WorkBoard, Mooncamp; OKRs do not live in Jira Product Discovery, which is for opportunity / idea management)
+- The OKR sheet (a sheet, Confluence, Lattice, Ally.io, WorkBoard, Mooncamp). OKRs do not live in Jira Product Discovery, which is for opportunity / idea management
 - Product-analytics events tied to each key result
 - Jira initiative progress
 - Last week's check-in notes for delta

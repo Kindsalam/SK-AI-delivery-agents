@@ -4,7 +4,7 @@
 
 ## What it is
 
-A read-only view of your team's real numbers in one place that everyone can see. The same view for the engineer, the product manager, the GM, and the newest grad on the team. The point is to remove the slide-polishing step. Every dashboard tool has filters, exclusion flags, and metric definitions someone with admin rights can change. The polishing layer does not disappear; it moves from the deck to the dashboard definition. The dashboard definition is a smaller surface to audit than a deck per quarter, but it is not zero. Pick someone outside the chain of command to own the metric definitions, and write the definitions down where the team can see them.
+A read-only view of your team's real numbers in one place that everyone can see. The same view for the engineer, the product manager, the GM, and the newest grad on the team. The point is to remove the slide-polishing step. Every dashboard tool has filters, exclusion flags, and metric definitions someone with admin rights can change. The polishing layer does not disappear. It moves from the deck to the dashboard definition. The dashboard definition is a smaller surface to audit than a deck per quarter, but it is not zero. Pick someone outside the chain of command to own the metric definitions, and write the definitions down where the team can see them.
 
 ## Why it matters
 

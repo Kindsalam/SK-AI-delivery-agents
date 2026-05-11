@@ -71,8 +71,6 @@ MIT. Fork it. Use it. Sell something based on it. Attribute if you want. The poi
 
 This is a reference, not a project. MIT licensed. Fork it, adapt it to your stack, drop the agents that do not fit, build the ones I did not name.
 
-I am not maintaining it as a community repo. Pull requests are not accepted. If you build something good with it, write your own piece. The pattern travels better that way.
-
 The canonical source is the companion article: [Delivery team agents. The full catalog.](https://salamkhan.au/blog/ai-enabled-delivery-the-agent-catalog)
 
 ## Standards

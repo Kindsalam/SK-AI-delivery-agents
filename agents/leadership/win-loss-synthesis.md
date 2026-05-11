@@ -6,7 +6,7 @@
 
 ## What it does
 
-Turns the win/loss programme that exists on paper into an actual deliverable. The head of product stops needing to carve out a Friday once a quarter to assemble it.
+Turns the win/loss program that exists on paper into an actual deliverable. The head of product stops needing to carve out a Friday once a quarter to assemble it.
 
 ## Reads from
 
@@ -33,11 +33,11 @@ Lands in the leadership Confluence space.
 
 ## Audience
 
-Head of product, GTM lead, GM, sales leadership, design-partner programme owner.
+Head of product, GTM lead, GM, sales leadership, design-partner program owner.
 
 ## Pain it removes
 
-The win/loss programme that only produces a synthesis when the head of product carves out a Friday for it.
+The win/loss program that only produces a synthesis when the head of product carves out a Friday for it.
 
 ## Verdict on dream-team originals
 
@@ -51,7 +51,7 @@ The prompt tells the runtime to read the win/loss inputs and produce a monthly d
 
 CRM closed-lost reasons are notoriously thin ("price too high", "went with competitor"). The agent will surface these as primary reasons even when the underlying causes are deeper. Push the GTM team to capture richer loss reasons during sales calls and post-mortems.
 
-If sales-call transcripts are not consented or not transcribed, the synthesis is missing the most useful input. Treat that as a programme-level fix, not an agent-level workaround.
+If sales-call transcripts are not consented or not transcribed, the synthesis is missing the most useful input. Treat that as a program-level fix, not an agent-level workaround.
 
 Pattern recognition can find spurious patterns. The first three months of running this agent will teach the LT which patterns the agent is reliable on and which are noise.
 

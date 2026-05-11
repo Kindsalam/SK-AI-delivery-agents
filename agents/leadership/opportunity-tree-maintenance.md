@@ -12,12 +12,12 @@ The opportunity-solution tree is Teresa Torres's continuous-discovery framework.
 
 ## Reads from
 
-- Discovery interview transcripts (Notion has a community MCP server; Dovetail and Otter do not have MCP servers as of mid-2026, so you will need to wrap their public APIs)
+- Discovery interview transcripts (Notion has a community MCP server. Dovetail and Otter do not have MCP servers as of mid-2026, so you will need to wrap their public APIs)
 - Customer-support ticket categories
 - In-product feedback
 - NPS verbatims
 - Sales-call notes if available
-- The current opportunity-solution tree
+- The current opportunity-solution tree on Miro or FigJam where most teams keep it
 
 ## Produces
 

@@ -28,6 +28,7 @@ The final call is always the team's. The candidate actions are starting points. 
 - The previous retro's action items and their completion status
 - The history of retro action items across the last quarter (which patterns recur, which fixes worked, which did not, which themes the team has discussed three times without resolution)
 - The team's agreed retrospective format (Start/Stop/Continue, 4Ls, Glad/Sad/Mad, etc.) so the candidate themes and actions land in the format the scrum master uses
+- The team's retro board on Miro or FigJam if that is where the team runs them
 
 ## Produces
 
@@ -94,7 +95,7 @@ Retros that start cold, retread the same three issues, never check whether last 
 
 ## Prompt-shape sketch
 
-The prompt tells the runtime to read the data sources, identify themes that recur or land hard this sprint, and draft a candidate action per theme that fits the team's typical action-item style. The prompt tells the runtime to be honest about recurrence count and about which prior actions moved versus which got forgotten. The prompt explicitly forbids the agent from writing the retro outcome, naming actions the team has not had a chance to discuss, or assigning Jira items. The candidate actions are starting points; the team commits.
+The prompt tells the runtime to read the data sources, identify themes that recur or land hard this sprint, and draft a candidate action per theme that fits the team's typical action-item style. The prompt tells the runtime to be honest about recurrence count and about which prior actions moved versus which got forgotten. The prompt explicitly forbids the agent from writing the retro outcome, naming actions the team has not had a chance to discuss, or assigning Jira items. The candidate actions are starting points. The team commits.
 
 ## Risks and cautions
 

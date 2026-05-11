@@ -46,7 +46,7 @@ The prompt tells the runtime to assemble a one-page-per-bet executive document. 
 
 The colour-coded signals are the most visible part of the readout. A wrong signal will erode trust in the agent quickly. The thresholds (what counts as red on spend-vs-committed, what counts as red on time-since-last-pivot) have to be agreed with the LT before the agent runs. Otherwise the agent picks defaults and the LT spends the meeting arguing about the thresholds rather than the bets.
 
-A monthly readout is only useful if the steering committee reads it. If the committee uses the meeting to be briefed rather than to decide, the agent is helping the wrong meeting. Push for the committee to read the doc before the meeting; the five-business-day cadence is intentional.
+A monthly readout is only useful if the steering committee reads it. If the committee uses the meeting to be briefed rather than to decide, the agent is helping the wrong meeting. Push for the committee to read the doc before the meeting. The five-business-day cadence is intentional.
 
 
 ---

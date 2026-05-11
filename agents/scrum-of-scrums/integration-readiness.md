@@ -1,7 +1,7 @@
 # integration-readiness-agent
 
 **Tier:** Scrum of Scrums / multi-team coordination
-**Cadence event:** Cross-team integration / system demo (in SAFe, the System Demo at PI cadence; in plain Scrum, the integration milestone)
+**Cadence event:** Cross-team integration / system demo (in SAFe, the System Demo at PI cadence. In plain Scrum, the integration milestone)
 **Cadence:** Runs daily during the week leading up to the integration date, then continuously the day of.
 
 ## What the team gets
