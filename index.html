@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Delivery team agents. The framework at a glance.</title>
+  <meta name="description" content="Twenty AI agents for delivery teams across three tiers: team Scrum, Scrum of Scrums, and LT cadence. The agent table, the cadence, and the one-line setup.">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: #fdfdf8;
+      color: #2a2a2a;
+      font-family: 'JetBrains Mono', ui-monospace, Menlo, Monaco, Consolas, monospace;
+      line-height: 1.65;
+      padding: 32px 20px 64px;
+      min-height: 100vh;
+    }
+    .scanline-overlay { display: none; }
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      position: relative;
+    }
+    header {
+      border: 1px solid #d6d6d0;
+      background: #ffffff;
+      padding: 28px 32px;
+      margin-bottom: 32px;
+      position: relative;
+    }
+    .corner { display: none; }
+    .header-bar {
+      color: #1a1a1a;
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+    .header-comment {
+      color: #6b6b6b;
+      font-size: 13px;
+      margin-bottom: 22px;
+    }
+    h1 {
+      color: #0a0a0a;
+      font-size: clamp(22px, 3.2vw, 30px);
+      font-weight: 600;
+      margin-bottom: 14px;
+      line-height: 1.3;
+    }
+    .intro {
+      max-width: 880px;
+      color: #2a2a2a;
+      font-size: 14px;
+      line-height: 1.7;
+    }
+    .intro p { margin-bottom: 10px; }
+    .intro p:last-child { margin-bottom: 0; }
+    .links {
+      margin-top: 22px;
+      font-size: 13px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+    }
+    .links a {
+      color: #2d6a3d;
+      text-decoration: none;
+      border-bottom: 1px solid #c4d4ba;
+      padding-bottom: 2px;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .links a:hover { color: #14411f; border-bottom-color: #2d6a3d; }
+
+    .table-wrap {
+      overflow-x: auto;
+      border: 1px solid #d6d6d0;
+      background: #ffffff;
+      position: relative;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12.5px;
+      min-width: 1400px;
+      table-layout: fixed;
+    }
+    /* explicit column widths so prose columns get room */
+    table col.col-agent    { width: 200px; }
+    table col.col-tier     { width: 140px; }
+    table col.col-cadence  { width: 170px; }
+    table col.col-what     { width: 280px; }
+    table col.col-setup    { width: 290px; }
+    table col.col-hygiene  { width: 320px; }
+    thead th {
+      background: #f3f3ec;
+      color: #0a0a0a;
+      text-align: left;
+      padding: 14px 12px;
+      font-weight: 600;
+      border-bottom: 1px solid #d6d6d0;
+      position: sticky;
+      top: 0;
+      z-index: 3;
+    }
+    tbody td {
+      padding: 12px;
+      border-bottom: 1px solid #ececec;
+      vertical-align: top;
+      color: #2a2a2a;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }
+    tbody tr:hover td { background: #faf9f3; }
+    tbody tr:last-child td { border-bottom: none; }
+
+    .agent { color: #0a0a0a; font-weight: 600; }
+    .tier {
+      font-size: 11.5px;
+      letter-spacing: 0.3px;
+      text-transform: uppercase;
+      color: #6b6b6b;
+    }
+    .tier-team { color: #2d6a3d; }
+    .tier-multi { color: #4a6b2d; }
+    .tier-portfolio { color: #4a6b2d; }
+    .tier-lt { color: #1a1a1a; }
+    .tier-also,
+    .tier-sub,
+    .tier-dep { color: #8a8a8a; font-style: italic; }
+    .cadence { color: #2a2a2a; font-size: 12px; }
+    .what { color: #2a2a2a; }
+    .setup { color: #4a4a4a; font-size: 12px; }
+    .hygiene { color: #4a4a4a; font-size: 12px; font-style: italic; }
+    code {
+      background: #ececec;
+      color: #1a1a1a;
+      padding: 1px 5px;
+      border-radius: 2px;
+      font-size: 11.5px;
+    }
+
+    .group-heading td {
+      background: #ebebe2;
+      color: #1a1a1a;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      padding: 12px 14px;
+      border-top: 1px solid #d6d6d0;
+      border-bottom: 1px solid #d6d6d0;
+    }
+
+    footer {
+      margin-top: 36px;
+      padding: 24px 32px;
+      border: 1px solid #d6d6d0;
+      background: #ffffff;
+      color: #6b6b6b;
+      font-size: 13px;
+      line-height: 1.7;
+      position: relative;
+    }
+    footer p { margin-bottom: 8px; }
+    footer p:last-child { margin-bottom: 0; }
+    footer a {
+      color: #2d6a3d;
+      text-decoration: none;
+      border-bottom: 1px solid #c4d4ba;
+      padding-bottom: 1px;
+    }
+    footer a:hover { color: #14411f; border-bottom-color: #2d6a3d; }
+
+    @media (max-width: 720px) {
+      body { padding: 20px 12px 48px; }
+      header { padding: 22px 18px; }
+      h1 { font-size: 22px; }
+      .intro { font-size: 13px; }
+      .links { gap: 16px; }
+      table { font-size: 11.5px; }
+      thead th, tbody td { padding: 10px 8px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="scanline-overlay"></div>
+
+  <div class="container">
+    <header>
+      <span class="corner corner-tl">┌</span>
+      <span class="corner corner-tr">┐</span>
+      <span class="corner corner-bl">└</span>
+      <span class="corner corner-br">┘</span>
+      <div class="header-bar">salamkhan.au ~ SK-AI-delivery-agents / framework-at-a-glance</div>
+      <div class="header-comment">// twenty agents across three tiers. one substrate. one deprecated. final call always sits with humans.</div>
+      <h1>Delivery team agents</h1>
+      <div class="intro">
+        <p>Twenty AI agents that help delivery teams run cadence at three tiers. The team running Scrum. The Scrum of Scrums where two to seven teams align. The leadership cadence where the unit of work is the quarter. Plus a substrate (transparency-scoreboard, which is a dashboard, not an agent) and one I deprecated (health-check).</p>
+        <p>Each agent prepares the room for a real conversation. The agent drafts. The product owner sharpens. The team commits. The leadership table decides. Final call always sits with humans.</p>
+      </div>
+      <div class="links">
+        <a href="https://salamkhan.au/blog/ai-enabled-delivery-the-agent-catalog">Read the full build guide →</a>
+        <a href="https://github.com/Kindsalam/SK-AI-delivery-agents">Browse the repo →</a>
+      </div>
+    </header>
+
+    <div class="table-wrap">
+      <table>
+        <colgroup>
+          <col class="col-agent">
+          <col class="col-tier">
+          <col class="col-cadence">
+          <col class="col-what">
+          <col class="col-setup">
+          <col class="col-hygiene">
+        </colgroup>
+        <thead>
+          <tr>
+            <th>Agent</th>
+            <th>Tier</th>
+            <th>Cadence</th>
+            <th>What it does</th>
+            <th>How to set it up</th>
+            <th>Data hygiene needed</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="group-heading"><td colspan="6">Tier 1. Team Scrum cadence (single team, sprint-aligned)</td></tr>
+
+          <tr>
+            <td class="agent">standup-update-agent</td>
+            <td class="tier tier-team">Team</td>
+            <td class="cadence">Daily, before 9am</td>
+            <td class="what">Drafts the overnight one-pager so the team walks into the Daily Scrum already informed.</td>
+            <td class="setup">MCP servers for Jira + GitHub + Slack/Teams; schedule daily 6–8am team-time.</td>
+            <td class="hygiene">Jira ticket states reflect reality (no fortnight-stale tickets); commits reference ticket IDs; Sprint Goal written in Jira sprint metadata or one canonical Confluence page.</td>
+          </tr>
+          <tr>
+            <td class="agent">pragmatic-brutal-facts-agent</td>
+            <td class="tier tier-team">Team</td>
+            <td class="cadence">Daily, 6:30am</td>
+            <td class="what">Flags drift against the team's own baseline so problems surface days, not sprints, late.</td>
+            <td class="setup">MCP for Jira + GitHub + bug tracker; precompute the 60–90 day baseline; schedule daily 6:30am.</td>
+            <td class="hygiene">60–90 days of sprint history in Jira; bug states reflect reality (no "fixed" tickets that aren't); sprint commitments tracked in Jira, not just on a board.</td>
+          </tr>
+          <tr>
+            <td class="agent">refinement-prep-agent</td>
+            <td class="tier tier-team">Team</td>
+            <td class="cadence">Epic-signoff + morning of refinement</td>
+            <td class="what">Drafts first-pass Jira stories under an Epic so the PO edits and the team discusses, not types.</td>
+            <td class="setup">MCP for Jira (read + write to <code>Draft</code>) + Confluence; trigger on Epic-signoff and morning of refinement; shadow mode for first week.</td>
+            <td class="hygiene">Epics have description + Epic-level acceptance criteria; Done stories share a consistent shape (the pattern library); team's Definition of Ready agreed and written down; design / spec pages linked on Epics.</td>
+          </tr>
+          <tr>
+            <td class="agent">sprint-planning-prep-agent</td>
+            <td class="tier tier-team">Team</td>
+            <td class="cadence">Morning of Planning + 24h draft</td>
+            <td class="what">Drafts Sprint Goal candidates with a capacity-checked Sprint Backlog per option so the room commits, not authors.</td>
+            <td class="setup">MCP for Jira + Confluence + calendar; schedule morning of Sprint Planning and 24h before; never writes to Jira sprint metadata.</td>
+            <td class="hygiene">Parent Initiative has a named top metric for the quarter; six sprints of velocity history; calendar / leave / on-call accessible; past Sprint Goals recorded in one canonical place.</td>
+          </tr>
+          <tr>
+            <td class="agent">retro-prep-agent</td>
+            <td class="tier tier-team">Team</td>
+            <td class="cadence">Morning of retro</td>
+            <td class="what">Drafts candidate themes and candidate actions so the team decides what to try, not fishes for ideas.</td>
+            <td class="setup">MCP for Jira + Confluence + brutal-facts feed; schedule morning of retro; shadow mode first week.</td>
+            <td class="hygiene">Retros land in one canonical place every sprint; action items tracked with completion status; team's retro format agreed (Start/Stop/Continue, 4Ls, etc.).</td>
+          </tr>
+          <tr>
+            <td class="agent">retro-synthesis-agent</td>
+            <td class="tier tier-team">Team</td>
+            <td class="cadence">End of every sprint; full pass quarterly</td>
+            <td class="what">Reads every retro across a quarter and surfaces themes that recur versus themes that got fixed.</td>
+            <td class="setup">MCP for the Confluence retro archive (or whichever retro tool the team uses); schedule end of every sprint, full pass at quarter-end.</td>
+            <td class="hygiene">4–12 sprints of retro history in one canonical place; themes recorded consistently across retros; action-item completion tracked.</td>
+          </tr>
+          <tr>
+            <td class="agent">sprint-goal-tracker-agent</td>
+            <td class="tier tier-team">Team</td>
+            <td class="cadence">Daily</td>
+            <td class="what">Watches the Sprint Goal trajectory so it is not written at planning and forgotten until review.</td>
+            <td class="setup">MCP for Jira sprint metadata; schedule daily; trajectory line is injected into the standup-update one-pager.</td>
+            <td class="hygiene">Sprint Goal written in Jira sprint metadata (or one canonical Confluence page); items linked to the goal via label, fix-version, or custom field.</td>
+          </tr>
+          <tr>
+            <td class="agent">team-dora-agent</td>
+            <td class="tier tier-team">Team</td>
+            <td class="cadence">Daily snapshot, weekly card</td>
+            <td class="what">Posts the four DORA numbers with trend arrows; pins to the transparency scoreboard.</td>
+            <td class="setup">MCP for CI/CD + incident tool + GitHub (joined for lead-time-to-prod); schedule daily, summarise weekly.</td>
+            <td class="hygiene">Production deploys uniformly tagged in CI/CD (one workflow, one tag); incidents linked to the deploy that caused them; PR-to-deploy traceability across the pipeline.</td>
+          </tr>
+          <tr>
+            <td class="agent">sprint-review-prep-agent</td>
+            <td class="tier tier-also">Team · also-considered</td>
+            <td class="cadence">Morning of Review + 24h draft</td>
+            <td class="what">Drafts the review pack so the PO is not scrambling on the morning to remember what shipped.</td>
+            <td class="setup">MCP for Jira + Confluence + GitHub; schedule 24h before and morning of Review.</td>
+            <td class="hygiene">Done items have AC populated; PRs and commits linked to tickets; demo-ready flag (or convention) used consistently if the team uses one.</td>
+          </tr>
+
+          <tr class="group-heading"><td colspan="6">Tier 2. Scrum of Scrums and multi-team coordination (program + portfolio scale)</td></tr>
+
+          <tr>
+            <td class="agent">cross-team-dependency-agent</td>
+            <td class="tier tier-multi">Multi-team</td>
+            <td class="cadence">Daily, before SoS</td>
+            <td class="what">Reads cross-team dependency links so the SoS does not open with twenty minutes of cross-team status.</td>
+            <td class="setup">MCP for Jira (across all participating teams' boards) + Confluence + Slack/Teams; schedule daily, 30 min before SoS.</td>
+            <td class="hygiene">Teams use Jira <code>is blocked by</code> / <code>blocks</code> consistently; cross-team Epic links populated; component ownership documented in Confluence.</td>
+          </tr>
+          <tr>
+            <td class="agent">integration-readiness-agent</td>
+            <td class="tier tier-multi">Multi-team</td>
+            <td class="cadence">Daily during integration week</td>
+            <td class="what">Drafts an honest go / no-go plus proposed unblock actions before the integration meeting walks in.</td>
+            <td class="setup">MCP for GitHub + CI/CD + feature-flag service + Jira; schedule daily during integration week, continuously the day of.</td>
+            <td class="hygiene">Integration tests exist and run in CI; contract tests run on cross-team APIs; feature flags tracked in one known place; items tagged for the integration in Jira.</td>
+          </tr>
+          <tr>
+            <td class="agent">multi-team-sprint-rollup-agent</td>
+            <td class="tier tier-multi">Multi-team</td>
+            <td class="cadence">End of every sprint</td>
+            <td class="what">Stitches each team's sprint-end signal into a program-level read for the program manager / RTE.</td>
+            <td class="setup">Reads outputs of team-level agents (sprint-goal-tracker, standup-update) plus Jira at Initiative level; schedule the morning after each team's review.</td>
+            <td class="hygiene">Every team in scope runs sprint-goal-tracker (so the goal-verdict signal exists); Initiative-level Jira links populated across teams; multi-team OKRs in one known place if used.</td>
+          </tr>
+          <tr>
+            <td class="agent">program-risk-radar-agent</td>
+            <td class="tier tier-multi">Multi-team</td>
+            <td class="cadence">Daily summary, weekly deep</td>
+            <td class="what">Lifts risk to where it compounds: across teams, dependencies, integrations, milestones. RAID-style.</td>
+            <td class="setup">MCP for Jira RAID + outputs of cross-team-dependency and integration-readiness; schedule daily summary, weekly deep pass.</td>
+            <td class="hygiene">RAID logs maintained per team or per program; risks have probability + impact scores and named mitigation owners; deadlines and milestone dates tracked in the program plan.</td>
+          </tr>
+          <tr>
+            <td class="agent">portfolio-sprint-rollup-agent</td>
+            <td class="tier tier-portfolio">Portfolio</td>
+            <td class="cadence">End of every sprint</td>
+            <td class="what">Stitches each program's rollup into a portfolio-level read for the portfolio leader.</td>
+            <td class="setup">Reads outputs of every program's multi-team-sprint-rollup; schedule end of every sprint at portfolio scale; shadow mode for two sprints.</td>
+            <td class="hygiene">Every program in scope runs multi-team-sprint-rollup cleanly; strategic-bets register exists with hypothesis + spend per bet; portfolio-level OKRs and milestones tracked in one canonical place.</td>
+          </tr>
+          <tr>
+            <td class="agent">chapter-throughput-agent</td>
+            <td class="tier tier-also">Multi-team · also-considered</td>
+            <td class="cadence">Weekly</td>
+            <td class="what">Surfaces the engineering chapter's pattern across teams: who drags the average, what cross-team patterns show.</td>
+            <td class="setup">Reads team-dora outputs across all teams in the chapter + Jira throughput metrics; schedule weekly.</td>
+            <td class="hygiene">team-dora-agent running cleanly on every team in the chapter for at least one quarter; DORA data accessible across teams under a single chapter view.</td>
+          </tr>
+
+          <tr class="group-heading"><td colspan="6">Tier 3. The LT cadence (quarter-aligned, leadership audience)</td></tr>
+
+          <tr>
+            <td class="agent">qbp-pack-prep-agent</td>
+            <td class="tier tier-lt">LT</td>
+            <td class="cadence">First week of new quarter</td>
+            <td class="what">Drafts the QBP pack so the LT walks in to candidate objectives, KRs, and bets to react to.</td>
+            <td class="setup">MCP for OKR sheet + Jira + Confluence + opportunity-tree + win/loss feed; schedule first week of new quarter; never updates the OKR sheet directly.</td>
+            <td class="hygiene">QBR pack from the just-completed quarter exists; OKR scorecard with weekly confidence ratings; strategic-bets register populated with hypothesis + evidence + spend per bet; opportunity-tree maintained.</td>
+          </tr>
+          <tr>
+            <td class="agent">qbr-pack-prep-agent</td>
+            <td class="tier tier-lt">LT</td>
+            <td class="cadence">Twice-weekly in final two weeks of quarter</td>
+            <td class="what">Drafts the QBR pack so the LT walks in to a pack everyone has read, not slides nobody finished.</td>
+            <td class="setup">MCP for north-star metric warehouse + OKR sheet + Jira + product-analytics + win/loss; schedule twice-weekly in final two weeks of quarter.</td>
+            <td class="hygiene">North-star metric tracked and named; OKR scorecard with weekly confidence ratings; strategic-bets register; last quarter's QBR pack archived for delta tracking.</td>
+          </tr>
+          <tr>
+            <td class="agent">okr-checkin-agent</td>
+            <td class="tier tier-lt">LT</td>
+            <td class="cadence">Monday 7am, Friday 4pm</td>
+            <td class="what">Runs the Wodtke weekly check-in; confidence rating per KR plotted against last week's number.</td>
+            <td class="setup">MCP for the OKR sheet (Confluence, Lattice, Ally.io, etc.) + product-analytics + Jira; schedule Monday 7am and Friday 4pm.</td>
+            <td class="hygiene">One canonical OKR location (not three competing ones); each KR has a confidence column; product-analytics events tied to each KR named in the sheet; Jira initiatives linked to KRs.</td>
+          </tr>
+          <tr>
+            <td class="agent">roadmap-status-agent</td>
+            <td class="tier tier-lt">LT</td>
+            <td class="cadence">Weekly digest, monthly delta</td>
+            <td class="what">Keeps the roadmap honest with what has happened, not what was remembered before the monthly meeting.</td>
+            <td class="setup">MCP for Jira + ProductBoard / Aha (or equivalent) + delivery capacity feed; schedule weekly digest, monthly deep document.</td>
+            <td class="hygiene">One canonical roadmap location; Jira initiatives have target quarters / milestones attached; last month's roadmap snapshot saved somewhere stable for delta comparison.</td>
+          </tr>
+          <tr>
+            <td class="agent">opportunity-tree-maintenance-agent</td>
+            <td class="tier tier-lt">LT</td>
+            <td class="cadence">Friday afternoon</td>
+            <td class="what">Updates Torres's opportunity-solution tree with the week's discovery signals as candidates the PM merges.</td>
+            <td class="setup">MCP for discovery transcripts (Notion native; Dovetail and Otter via custom wrappers) + product feedback + the canonical tree; schedule Friday afternoon.</td>
+            <td class="hygiene">Discovery interviews are transcribed each week; the opportunity-solution tree exists as a canonical artefact (not just slides); customer-feedback channels tagged consistently.</td>
+          </tr>
+          <tr>
+            <td class="agent">win-loss-synthesis-agent</td>
+            <td class="tier tier-lt">LT</td>
+            <td class="cadence">Monthly digest + quarterly synthesis</td>
+            <td class="what">Turns the win/loss programme that exists on paper into a real synthesis the LT actually reads.</td>
+            <td class="setup">MCP for CRM + sales-call transcripts (where consented) + product-analytics + churn surveys; schedule monthly digest + quarterly synthesis.</td>
+            <td class="hygiene">A real win/loss programme exists (interview discipline, not just CRM closed-reason fields); CRM closed-won and closed-lost reasons structured and tagged consistently; sales-call transcripts saved where consented.</td>
+          </tr>
+          <tr>
+            <td class="agent">portfolio-bets-readout-agent</td>
+            <td class="tier tier-lt">LT</td>
+            <td class="cadence">Monthly, five business days before steering</td>
+            <td class="what">Prepares the steering / board readout so the head of product is not writing the same paragraphs every month.</td>
+            <td class="setup">MCP for the strategic-bets register + OKR scorecard + win/loss feed; schedule monthly, five business days before steering.</td>
+            <td class="hygiene">Strategic-bets register has hypothesis + evidence + spend per bet; north-star metric tracked and named; LT has agreed thresholds for each colour-coded signal (red / amber / green) before the agent runs.</td>
+          </tr>
+          <tr>
+            <td class="agent">design-partner-state-agent</td>
+            <td class="tier tier-also">LT · also-considered</td>
+            <td class="cadence">Monthly</td>
+            <td class="what">Tracks each design partner's engagement state so the drifting one does not show up on a churn list.</td>
+            <td class="setup">MCP for design-partner CRM + product-analytics + support tickets; schedule monthly. Assumes a real design-partner programme exists.</td>
+            <td class="hygiene">Design partners tracked in a CRM with a canonical partner ID (not split across systems); per-partner usage data accessible; convert-to-paying milestones recorded; scheduled-call cadence tracked.</td>
+          </tr>
+          <tr>
+            <td class="agent">strategic-account-product-review-agent</td>
+            <td class="tier tier-also">LT · also-considered</td>
+            <td class="cadence">Quarterly</td>
+            <td class="what">Reviews the top-ten enterprise accounts so the head of product is not reading ten Slack channels on a weekend.</td>
+            <td class="setup">MCP for CRM + customer-success notes + usage data; schedule second-to-last week of quarter. Assumes enterprise CS maturity.</td>
+            <td class="hygiene">Account usage data tracked per account; customer-success notes written in one canonical place; expansion-revenue tracking; churn-risk score available; feature-request log per account.</td>
+          </tr>
+
+          <tr class="group-heading"><td colspan="6">Substrate and deprecated</td></tr>
+
+          <tr>
+            <td class="agent">transparency-scoreboard</td>
+            <td class="tier tier-sub">Substrate · not an agent</td>
+            <td class="cadence">Live dashboard</td>
+            <td class="what">Read-only dashboard holding the team's real numbers in one place everyone can see.</td>
+            <td class="setup">Build in your existing dashboard tool (Tableau, Looker, Metabase, Notion). Name a metric-definition owner outside the chain of command.</td>
+            <td class="hygiene">Metric definitions agreed and written down where the team can see them; data sources connected and refreshed reliably; metric-definition owner sits outside the chain of command of whoever the metrics judge.</td>
+          </tr>
+          <tr>
+            <td class="agent">health-check-agent</td>
+            <td class="tier tier-dep">Deprecated</td>
+            <td class="cadence">n/a</td>
+            <td class="what">Reading chat tone and 1-on-1 notes for burnout signals carries severe surveillance risk.</td>
+            <td class="setup">Do not build. The deprecation rationale is in the article and in <code>agents/deprecated/health-check.md</code>.</td>
+            <td class="hygiene">N/A. Burnout signals are picked up better by humans paying attention; make sure your retros and 1-on-1s have space for the signal to come up.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <footer>
+      <span class="corner corner-tl">┌</span>
+      <span class="corner corner-tr">┐</span>
+      <span class="corner corner-bl">└</span>
+      <span class="corner corner-br">┘</span>
+      <p>By Salam Khan. The framework is the catalog. The agents are templates. The team you build them for is the actual product.</p>
+      <p>Full build guide: <a href="https://salamkhan.au/blog/ai-enabled-delivery-the-agent-catalog">salamkhan.au/blog/ai-enabled-delivery-the-agent-catalog</a></p>
+      <p>Templates and risks per agent: <a href="https://github.com/Kindsalam/SK-AI-delivery-agents">github.com/Kindsalam/SK-AI-delivery-agents</a></p>
+      <p>Feedback: <a href="mailto:salam@9t5.com.au">salam@9t5.com.au</a></p>
+      <p style="margin-top: 14px; color: #4d7d4d; font-size: 12px;">$ ./framework --at-a-glance &nbsp;|&nbsp; v.1</p>
+    </footer>
+  </div>
+</body>
+</html>

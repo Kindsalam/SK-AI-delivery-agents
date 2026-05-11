@@ -1,0 +1,8 @@
+# Local review aid. Regenerate with the build script in the README.
+REVIEW.md
+
+# OS / editor cruft
+.DS_Store
+.vscode/
+.idea/
+*.swp
