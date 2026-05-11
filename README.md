@@ -2,7 +2,7 @@
 
 A starter set of AI agents for delivery teams. Twenty-four of them, plus one substrate (a dashboard, not an agent) and one I deprecated. Each one is a markdown file describing what the agent reads, what it produces, when it runs, who reads it, and a prompt-shape sketch in plain English.
 
-This repo is the companion to my article [Delivery team agents. The full catalog. From standup to the steering committee.](https://salamkhan.au/blog/ai-enabled-delivery-the-agent-catalog). Read the article first if you want the why and the how. Read the files here if you want the what.
+This repo is the companion to my article [Delivery team agents. The full catalogue. From standup to the steering committee.](https://salamkhan.au/blog/ai-enabled-delivery-the-agent-catalog). Read the article first if you want the why and the how. Read the files here if you want the what.
 
 ## Who this is for
 
@@ -47,7 +47,7 @@ No code. No YAML. No prompt examples to copy and paste. The same logical-level p
 
 The article names a take / make / deprecate verdict on every agent the dream-team piece named. The short version:
 
-- **standup-update-agent**: take. Spine of the catalog.
+- **standup-update-agent**: take. Spine of the catalogue.
 - **project-or-product-updates-agent**: make and split. At single-team scale it is the standup-update. At multi-team scale it is the multi-team-sprint-rollup. At LT scale it is the qbr-pack-prep, the qbp-pack-prep, and the portfolio-bets-readout.
 - **pragmatic-brutal-facts-agent**: take. Reads drift, not state.
 - **transparency-scoreboard**: take, recast as a substrate, not an agent.
@@ -71,7 +71,7 @@ MIT. Fork it. Use it. Sell something based on it. Attribute if you want. The poi
 
 This is a reference, not a project. MIT licensed. Fork it, adapt it to your stack, drop the agents that do not fit, build the ones I did not name.
 
-The canonical source is the companion article: [Delivery team agents. The full catalog.](https://salamkhan.au/blog/ai-enabled-delivery-the-agent-catalog)
+The canonical source is the companion article: [Delivery team agents. The full catalogue.](https://salamkhan.au/blog/ai-enabled-delivery-the-agent-catalog)
 
 ## Standards
 
